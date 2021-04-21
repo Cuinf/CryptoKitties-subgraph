@@ -1,0 +1,5 @@
+type KittyOwner @entity {
+  id: ID!
+  kittyId: ID!
+  owner: Bytes!
+}
