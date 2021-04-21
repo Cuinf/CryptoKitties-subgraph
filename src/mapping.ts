@@ -3,7 +3,6 @@ import { KittyOwner } from '../generated/schema'
 
 export function handleBirth(event: Birth): void {
     let kitty = new KittyOwner(event.params.kittyId.toHex())
-    kitty.kittyId = event.params.kittyId
     kitty.owner = event.params.owner
     kitty.save()
 }
