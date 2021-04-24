@@ -24,7 +24,7 @@ export function handleTransfer(event: Transfer): void {
     let previousOwner = event.params.from.toHex()
     let kittyBalance = KittyBalance.load(previousOwner)
     if (kittyBalance != null) {
-        if (kittyBalance.amount > 0) {
+        if (kittyBalance.amount > BigInt.fromI32(0)) {
             kittyBalance.amount -= BigInt.fromI32(1)
         }
     }
