@@ -7,7 +7,7 @@ export function handleBirth(event: Birth): void {
     kitty.owner = event.params.owner
     kitty.save()
 
-    let kittyBalance = new KittyBalance(event.params.owner)
+    let kittyBalance = new KittyBalance(event.params.owner.toHex())
     kittyBalance.amount = BigInt.fromI32(1)
     kittyBalance.save()
 }
