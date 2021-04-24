@@ -4,6 +4,6 @@ type KittyOwner @entity {
 }
 
 type KittyBalance @entity {
-  owner: ID!
+  id: ID!
   amount: BigInt!
 }
