@@ -33,7 +33,7 @@ export function handleTransfer(event: Transfer): void {
     let newOwner = event.params.to.toHex()
     let newKittyBalance = KittyBalance.load(newOwner)
     if (newKittyBalance == null) {
-        newKittyBalance = new kittyBalance(newOwner)
+        newKittyBalance = new KittyBalance(newOwner)
     }
     newKittyBalance.amount += BigInt.fromI32(1)
     newKittyBalance.save()
