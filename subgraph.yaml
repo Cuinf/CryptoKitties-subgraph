@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 description: Owners of CryptoKitties
-repository: https://github.com/Cuinf/example-subgraph
+repository: https://github.com/Cuinf/CryptoKitties-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
