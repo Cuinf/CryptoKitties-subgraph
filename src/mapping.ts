@@ -1,12 +1,15 @@
 import { Birth, Transfer } from '../generated/CryptoKitties/CryptoKitties'
-import { KittyOwner } from '../generated/schema'
-//import { BigInt } from "@graphprotocol/graph-ts"
+import { KittyOwner, KittyBalance } from '../generated/schema'
+import { BigInt } from "@graphprotocol/graph-ts"
 
 export function handleBirth(event: Birth): void {
     let kitty = new KittyOwner(event.params.kittyId.toHex())
     kitty.owner = event.params.owner
-    //kitty.count = BigInt.fromI32(1)
     kitty.save()
+
+    let kittyBalance = new KittyBalance(event.params.owner)
+    kittyBalance.amount = BigInt.fromI32(1)
+    kittyBalance.save()
 }
 
 export function handleTransfer(event: Transfer): void {
@@ -17,4 +20,21 @@ export function handleTransfer(event: Transfer): void {
     }
     kitty.owner = event.params.to
     kitty.save()
+
+    let previousOwner = event.params.from.toHex()
+    let kittyBalance = KittyBalance.load(previousOwner)
+    if (kittyBalance != null) {
+        if (kittyBalance.amount > 0) {
+            kittyBalance.amount -= BigInt.fromI32(1)
+        }
+    }
+    kittyBalance.save()
+
+    let newOwner = event.params.to.toHex()
+    let newKittyBalance = KittyBalance.load(newOwner)
+    if (newKittyBalance == null) {
+        newKittyBalance = new kittyBalance(newOwner)
+    }
+    newKittyBalance.amount += BigInt.fromI32(1)
+    newKittyBalance.save()
 }
