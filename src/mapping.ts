@@ -13,28 +13,36 @@ export function handleBirth(event: Birth): void {
 }
 
 export function handleTransfer(event: Transfer): void {
-    let id = event.params.tokenId.toHex()
-    let kitty = KittyOwner.load(id)
+    let id1 = event.params.tokenId.toHex()
+    let kitty = KittyOwner.load(id1)
     if (kitty == null) {
-        kitty = new KittyOwner(id)
+        kitty = new KittyOwner(id1)
     }
     kitty.owner = event.params.to
     kitty.save()
 
-    let previousOwner = event.params.from.toHex()
-    let kittyBalance = KittyBalance.load(previousOwner)
-    if (kittyBalance != null) {
-        if (kittyBalance.amount > BigInt.fromI32(0)) {
-            kittyBalance.amount -= BigInt.fromI32(1)
-        }
+    let id2 = event.params.to.toHex()
+    let kittyBalance = KittyBalance.load(id2)
+    if (kittyBalance == null) {
+        kittyBalance = new KittyBalance(id2)
     }
+    kittyBalance.amount += BigInt.fromI32(1)
     kittyBalance.save()
+    
+    // let previousOwner = event.params.from.toHex()
+    // let kittyBalance = KittyBalance.load(previousOwner)
+    // if (kittyBalance != null) {
+    //     if (kittyBalance.amount > BigInt.fromI32(0)) {
+    //         kittyBalance.amount -= BigInt.fromI32(1)
+    //     }
+    // }
+    // kittyBalance.save()
 
-    let newOwner = event.params.to.toHex()
-    let newKittyBalance = KittyBalance.load(newOwner)
-    if (newKittyBalance == null) {
-        newKittyBalance = new KittyBalance(newOwner)
-    }
-    newKittyBalance.amount += BigInt.fromI32(1)
-    newKittyBalance.save()
+    // let newOwner = event.params.to.toHex()
+    // let newKittyBalance = KittyBalance.load(newOwner)
+    // if (newKittyBalance == null) {
+    //     newKittyBalance = new KittyBalance(newOwner)
+    // }
+    // newKittyBalance.amount += BigInt.fromI32(1)
+    // newKittyBalance.save()
 }
