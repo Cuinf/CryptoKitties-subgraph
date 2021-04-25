@@ -21,23 +21,15 @@ export function handleTransfer(event: Transfer): void {
     kitty.owner = event.params.to
     kitty.save()
 
-    // let id2 = event.params.to.toHex()
-    // let kittyBalance = KittyBalance.load(id2)
-    // if (kittyBalance == null) {
-    //     kittyBalance = new KittyBalance(id2)
-    //     kittyBalance.amount = BigInt.fromI32(0)
-    // }
-    // kittyBalance.amount += BigInt.fromI32(1)
-    // kittyBalance.save()
-
     let previousOwner = event.params.from.toHex()
     let kittyBalance = KittyBalance.load(previousOwner)
     if (kittyBalance != null) {
         if (kittyBalance.amount > BigInt.fromI32(0)) {
             kittyBalance.amount = kittyBalance.amount - BigInt.fromI32(1)
         }
-    }
-    kittyBalance.save()
+        kittyBalance.save()
+    } 
+    
 
     let newOwner = event.params.to.toHex()
     let newKittyBalance = KittyBalance.load(newOwner)
