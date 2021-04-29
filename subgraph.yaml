@@ -62,4 +62,4 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/mapping_Rarible.ts
+      file: ./src/mapping_rarible.ts
