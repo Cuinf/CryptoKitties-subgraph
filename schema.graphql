@@ -1,32 +1,12 @@
 # The entities for CryptoKitties.
 type KittyOwner @entity {
-  id: ID!
-  owner: Bytes!
+  id: ID! #entity id
+  tokenId: BigInt! #token id
+  owner: Bytes! #owner of the token
+  contract: Bytes! #contract address
 }
 
 type KittyBalance @entity {
   id: ID!
   amount: BigInt!
-}
-
-# The entities for Polkamon.
-type PolkamonOwner @entity {
-  id: ID! #token id
-  owner: Bytes! #owner address
-}
-
-type PolkamonBalance @entity {
-  id: ID! #owner address
-  amount: BigInt! #the amount of the token
-}
-
-# The entities for Rarible.
-type RaribleOwner @entity {
-  id: ID! #token id
-  owner: Bytes! #owner address
-}
-
-type RaribleBalance @entity {
-  id: ID! #owner address
-  amount: BigInt! #the amount of the token
 }
