@@ -7,7 +7,7 @@ export function handleBirth(event: Birth): void {
     let kitty = new KittyOwner(id)
     kitty.tokenId = event.params.kittyId
     kitty.owner = event.params.owner
-    kitty.contract = Address.fromString("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d")
+    kitty.contract = event.address
     kitty.save()
 
     let kittyBalance = new KittyBalance(event.params.owner.toHex())
@@ -21,7 +21,7 @@ export function handleTransfer(event: Transfer): void {
     if (kitty == null) {
         kitty = new KittyOwner(id)
         kitty.tokenId = event.params.tokenId
-        kitty.contract = Address.fromString("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d")
+        kitty.contract = event.address
     }   
     kitty.owner = event.params.to
     kitty.save()
