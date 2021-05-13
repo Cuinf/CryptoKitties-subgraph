@@ -18,7 +18,7 @@ export function handleBirth(event: Birth): void {
 }
 
 export function handleTransfer(event: Transfer): void {
-    let id = event.params.kittyId.toHex()
+    let id = event.params.tokenId.toHex()
     let kitty = KittyOwner.load(id)
     if (kitty == null) {
         kitty = new KittyOwner(id)
