@@ -42,24 +42,4 @@ export function handleTransfer(event: Transfer): void {
     let kittyBalance = new KittyBalance(event.params.to.toHex())
     kittyBalance.amount = contract.balanceOf(event.params.to)
     kittyBalance.save()
-
-    //count the amount of tokens hold by an owner
-    // let previousOwner = event.params.from.toHex()
-    // let kittyBalance = KittyBalance.load(previousOwner)
-    // if (kittyBalance != null) {
-    //     if (kittyBalance.amount > BigInt.fromI32(0)) {
-    //         kittyBalance.amount = kittyBalance.amount - BigInt.fromI32(1)
-    //     }
-    //     kittyBalance.save()
-    // } 
-    
-
-    // let newOwner = event.params.to.toHex()
-    // let newKittyBalance = KittyBalance.load(newOwner)
-    // if (newKittyBalance == null) {
-    //     newKittyBalance = new KittyBalance(newOwner)
-    //     newKittyBalance.amount = BigInt.fromI32(0)
-    // }
-    // newKittyBalance.amount = newKittyBalance.amount + BigInt.fromI32(1)
-    // newKittyBalance.save()
 }
